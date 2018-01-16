@@ -1,0 +1,59 @@
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by MESMERiZE (MiZE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="locatorBean">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="page" type="page" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="page">
+		<xs:sequence>
+			<xs:element name="locator" type="locator" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attributeGroup"/>
+	</xs:complexType>
+	<xs:complexType name="locator">
+		<xs:attributeGroup ref="attributeGroup"/>
+	</xs:complexType>
+	<xs:attributeGroup name="attributeGroup">
+		<xs:attribute name="id" type="xs:ID" use="required"/>
+		<xs:attribute name="ref" type="xs:IDREF"/>
+		<xs:attribute name="type" type="locatorType"/>
+		<xs:attribute name="by" type="byType"/>
+		<xs:attribute name="expression" type="xs:string"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="description" type="xs:string" use="required"/>	
+	</xs:attributeGroup>
+	<xs:simpleType name="locatorType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="WebElement"/>
+			<xs:enumeration value="WebEdit"/>
+			<xs:enumeration value="WebButton"/>
+			<xs:enumeration value="WebCheckBox"/>
+			<xs:enumeration value="WebRadioGroup"/>
+			<xs:enumeration value="WebFile"/>
+			<xs:enumeration value="WebList"/>
+			<xs:enumeration value="WebTable"/>
+			<xs:enumeration value="WebTableRow"/>
+			<xs:enumeration value="WebTableColumn"/>
+			<xs:enumeration value="WebTableCell"/>
+			<xs:enumeration value="Image"/>
+			<xs:enumeration value="Frame"/>
+			<xs:enumeration value="Link"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="byType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="id"/>
+			<xs:enumeration value="name"/>
+			<xs:enumeration value="className"/>
+			<xs:enumeration value="tagName"/>
+			<xs:enumeration value="cssSelector"/>
+			<xs:enumeration value="xpath"/>
+			<xs:enumeration value="linkText"/>
+			<xs:enumeration value="partialLinkText"/>
+			<xs:enumeration value="javascript"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	jxb:extensionBindingPrefixes="ci " jxb:version="2.1">
+	<jxb:bindings schemaLocation="locatorBean.xsd" node="/xs:schema">
+		<!-- <jxb:globalBindings fixedAttributeAsConstantProperty="true" collectionType="java.util.Vector" 
+			typesafeEnumBase="xs:NCName" choiceContentProperty="false" typesafeEnumMemberName="generateError" 
+			bindingStyle="elementBinding" enableFailFastCheck="false" generateIsSetMethod="false" 
+			underscoreBinding="asCharInWord" /> -->
+		<jxb:bindings node="//xs:element[@name='locatorBean']/xs:complexType">
+			<ci:code>
+	public Page page(String id) throws Exception {
+		return (Page) org.yiwan.webcore.util.Helper.filterListById(this.getPage(), id);
+	}
+
+	public Locator locator(String id, String... replacements) throws Exception {
+		int index = id.indexOf(".");
+		String pageid = id.substring(0, index);
+		return page(pageid).locator(id, replacements);
+	}
+			</ci:code>
+		</jxb:bindings>
+		<jxb:bindings node="//xs:complexType[@name='page']">
+			<ci:code>
+	public Locator locator(String id, String... replacements) throws Exception {
+		Locator locator = (Locator) org.yiwan.webcore.util.Helper.filterListById(this.getLocator(), id);
+		if (locator != null) {
+			if (locator.getRef() != null)
+				locator = (Locator) locator.getRef();
+			if (locator.getPage() == null)
+				locator.setPage(this);
+			String expression = locator.getExpression();
+			String expression_temp = "";
+			for (int i = 0; i &lt; replacements.length; i++) {
+				int index = expression.indexOf(org.yiwan.webcore.util.PropHelper.REPLACEMENT_SYMBOL);
+				expression_temp += expression.substring(0, index) + replacements[i];
+				expression = expression.substring(index + 1);
+			}
+			expression_temp += expression;
+			locator.setExpression_(expression_temp);
+		}
+		return locator;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s (%s) page", name, id);
+	}
+			</ci:code>
+		</jxb:bindings>
+		<jxb:bindings node="//xs:complexType[@name='locator']">
+			<ci:code>
+	public org.openqa.selenium.By by() {
+		switch (by) {
+		case ID:
+			return org.openqa.selenium.By.id(expression_);
+		case NAME:
+			return org.openqa.selenium.By.name(expression_);
+		case CLASS_NAME:
+			return org.openqa.selenium.By.className(expression_);
+		case TAG_NAME:
+			return org.openqa.selenium.By.tagName(expression_);
+		case CSS_SELECTOR:
+			return org.openqa.selenium.By.cssSelector(expression_);
+		case XPATH:
+			return org.openqa.selenium.By.xpath(expression_);
+		case LINK_TEXT:
+			return org.openqa.selenium.By.linkText(expression_);
+		case PARTIAL_LINK_TEXT:
+			return org.openqa.selenium.By.partialLinkText(expression_);
+		case JAVASCRIPT:
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s (%s) %s by %s (%s) @ %s", name, id, type.value(), by.value(), expression_, page);
+	}
+	
+	private Page page;
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+
+	private String expression_;
+
+	public String getExpression_() {
+		return expression_;
+	}
+
+	public void setExpression_(String expression_) {
+		this.expression_ = expression_;
+	}
+			</ci:code>
+		</jxb:bindings>
+	</jxb:bindings>
+</jxb:bindings>

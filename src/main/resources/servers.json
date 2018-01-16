@@ -1,0 +1,63 @@
+[
+  {
+    "applicationServers": [
+      {
+        "id": 0,
+        "name": null,
+        "url": null,
+        "host": null,
+        "port": null,
+        "version": null,
+        "username": null,
+        "password": null,
+        "key": null,
+        "hardwareInformation": {
+          "type": null,
+          "os": null,
+          "osVersion": null,
+          "cpu": null,
+          "memory": null,
+          "bandwith": null
+        },
+        "softwareInformations": [
+          {
+            "id": 0,
+            "name": null,
+            "version": null
+          }
+        ]
+      }
+    ],
+    "databaseServers": [
+      {
+        "id": 0,
+        "name": null,
+        "driver": null,
+        "url": null,
+        "host": null,
+        "port": null,
+        "version": null,
+        "instance": null,
+        "schema": null,
+        "dump": null,
+        "username": null,
+        "password": null,
+        "hardwareInformation": {
+          "type": null,
+          "os": null,
+          "osVersion": null,
+          "cpu": null,
+          "memory": null,
+          "bandwith": null
+        },
+        "softwareInformations": [
+          {
+            "id": 0,
+            "name": null,
+            "version": null
+          }
+        ]
+      }
+    ]
+  }
+]
