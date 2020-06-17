@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>21.0</version>
+            <version>24.1.1</version>
         </dependency>
         <!-- Add by Kent to solve the dependency conflict issue -->
         <dependency>
